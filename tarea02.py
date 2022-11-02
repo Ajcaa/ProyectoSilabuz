@@ -86,4 +86,56 @@ def info_general(elija):
 
 info_general(elija)
 
-print("Test")
+
+
+
+print("""
+                                HABITATS DE POKEMON
+
+                            1. Cave         6. Rough-terrain                  
+                            2. Forest       7. Sea                   
+                            3. Grassland    8. Urban             
+                            4. Mountain     9. Waters-edge            
+                            5. Rare                    
+"""
+)
+
+
+
+import requests 
+
+url_hab = "https://pokeapi.co/api/v2/pokemon-habitat/"
+url_poke= "https://pokeapi.co/api/v2/pokemon/"
+
+nom_hab = str(input("\nIngrese un habitad: "))
+
+def url_habitat(nom_hab):
+    return requests.get(url_hab + nom_hab).json()
+
+def urlPokemon(name_pokemon):
+    return requests.get(url_poke+name_pokemon).json()
+
+
+
+
+def habitat_from_rp(response_habitat):
+    for i in response_habitat['pokemon_species']:
+        print(f"\nNombre: " + i['name'])
+        abilities_from_rp(urlPokemon(i['name']))
+        get_image_from_rp(urlPokemon(i['name']))
+        
+def abilities_from_rp(rp_pokemon):
+    for i in rp_pokemon['abilities']:
+        print("Habilidad:" + i['ability']['name'])    
+        
+def get_image_from_rp(rp_pokemon):
+    print(rp_pokemon['sprites']["front_default"])
+
+
+def info_habitat(nom_hab):
+    response_habitat = url_habitat(nom_hab)  #la URL de la generacion
+    print("\nHabitat:",nom_hab)       
+    habitat_from_rp(response_habitat)
+    
+    
+info_habitat(nom_hab)
