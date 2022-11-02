@@ -85,3 +85,5 @@ def info_general(elija):
 
 
 info_general(elija)
+
+print("Test")
