@@ -133,7 +133,7 @@ def get_image_from_rp(rp_pokemon):
 
 
 def info_habitat(nom_hab):
-    response_habitat = url_habitat(nom_hab)  #la URL de la generacion
+    response_habitat = url_habitat(nom_hab) 
     print("\nHabitat:",nom_hab)       
     habitat_from_rp(response_habitat)
     
