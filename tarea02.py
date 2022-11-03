@@ -1,5 +1,19 @@
 import requests
 
+
+print("""
+                                GENERACIONES DE POKEMON
+                                    1            5         
+                                    2            6        
+                                    3            7      
+                                    4            8
+                                               
+"""
+)
+
+
+
+
 pokeapi_generation = "https://pokeapi.co/api/v2/generation/"
 pokeapi_pokemon= "https://pokeapi.co/api/v2/pokemon/"
 num_generation = str(input("\nIngrese la generación: "))
@@ -133,9 +147,56 @@ def get_image_from_rp(rp_pokemon):
 
 
 def info_habitat(nom_hab):
-    response_habitat = url_habitat(nom_hab)  #la URL de la generacion
+    response_habitat = url_habitat(nom_hab)  
     print("\nHabitat:",nom_hab)       
     habitat_from_rp(response_habitat)
     
     
 info_habitat(nom_hab)
+
+
+
+print("""
+                                HABILIDADES DE POKEMON
+        1. stench           6. damp           11. water-absorb      16. color-change 
+        2. drizzle          7. limber         12. oblivious         17. immunity
+        3. speed-boost      8. sand-veil      13. cloud-nine        18. flash-fire
+        4. battle-armor     9. static         14. compound-eyes     19. shield-dust
+        5. sturdy           10.volt-absorb    15. insomnia          20. own-tempo
+"""
+)
+
+
+
+pokeapi_ability = "https://pokeapi.co/api/v2/ability/"
+pokeapi_poke= "https://pokeapi.co/api/v2/pokemon/"  
+nom_ability = str(input("\nIngrese el ID o nombre de la habilidad: "))
+
+
+def request_ability(nom_ability):
+    return requests.get(pokeapi_ability+nom_ability).json()
+
+def request_pokemon(name_poke):
+    return requests.get(pokeapi_pokemon+name_poke).json()
+
+def get_ability_from_rsp(response_ability):
+    for i in response_ability['pokemon']:
+        print(f"\nNombre: " + i['pokemon']['name'])
+        get_abilities_from_rsp(request_pokemon(i['pokemon']['name']))
+        get_image_from_rsp(request_pokemon(i['pokemon']['name']))
+        
+def get_abilities_from_rsp(rsp_pokemon):
+    for i in rsp_pokemon['abilities']:
+        print("Habilidad:" + i['ability']['name'])    
+        
+def get_image_from_rsp(rsp_pokemon):
+    print(rsp_pokemon['sprites']["front_default"])
+
+
+def get_info_from_ability(nom_ability):
+    response_ability = request_ability(nom_ability)
+    print(f"\nHabilidad: {nom_ability}:")
+    get_ability_from_rsp(response_ability)
+    
+    
+get_info_from_ability (nom_ability)
