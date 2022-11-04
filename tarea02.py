@@ -10,13 +10,12 @@ print('''
 
 ''')
 
-#Agregar Imagenes
 
 option = int(input("Elija el numero de una opcion:  "))
 
 if option == 1:
 
-    print("------------------------------OPCION 1----------------------------")
+    print("---------------------------*-OPCION 1-----------------------------")
 
 
     print("""
@@ -32,11 +31,9 @@ if option == 1:
     
 
     pokeapi_generation = "https://pokeapi.co/api/v2/generation/"
-    pokeapi_pokemon= "https://pokeapi.co/api/v2/pokemon/"  #pokeapi_pokemon
-    try: 
-        num_generation = str(input("\nIngrese la generación: "))
-    except requests.exceptions.JSONDecodeError:
-        print("No es un numero valido")
+    pokeapi_pokemon= "https://pokeapi.co/api/v2/pokemon/"  
+    num_generation = str(input("\nIngrese la generación: "))
+
         
 
 
@@ -58,7 +55,7 @@ if option == 1:
             print("Habilidad:" + i['ability']['name'])    
             
     def get_image_from_response(response_pokemon):
-        print(response_pokemon['sprites']["front_default"])
+        print("Imagen:" + response_pokemon['sprites']["front_default"])
 
 
     def get_info_from_generation(num_generation):
@@ -88,7 +85,7 @@ if option == 1:
 
 if option == 3:
 
-    print("------------------------------OPCION 3----------------------------")
+    print("--------------------------------OPCION 3--------------------------------")
 
 
     print("""
@@ -104,7 +101,7 @@ if option == 3:
 
 
     pokeapi_ability = "https://pokeapi.co/api/v2/ability/"
-    pokeapi_poke= "https://pokeapi.co/api/v2/pokemon/"  #pokeapi_poke
+    pokeapi_poke= "https://pokeapi.co/api/v2/pokemon/"  
     nom_ability = str(input("\nIngrese el ID o nombre de la habilidad: "))
 
 
@@ -112,7 +109,7 @@ if option == 3:
         return requests.get(pokeapi_ability+nom_ability).json()
 
     def request_pokemon(name_poke):
-        return requests.get(pokeapi_pokemon+name_poke).json()
+        return requests.get(pokeapi_poke+name_poke).json()
 
     def get_ability_from_rsp(response_ability):
         for i in response_ability['pokemon']:
@@ -125,7 +122,7 @@ if option == 3:
             print("Habilidad:" + i['ability']['name'])    
             
     def get_image_from_rsp(rsp_pokemon):
-        print(rsp_pokemon['sprites']["front_default"])
+        print("Imagen:" + rsp_pokemon['sprites']["front_default"])
 
 
     def get_info_from_ability(nom_ability):
@@ -142,7 +139,7 @@ if option == 3:
 
 if option == 4:
 
-    print("-----------------------------OPCION 4------------------------------")
+    print("--------------------------------OPCION 4--------------------------------")
 
 
     print("""
@@ -158,14 +155,14 @@ if option == 4:
 
 
     url_hab = "https://pokeapi.co/api/v2/pokemon-habitat/"
-    urlPoke= "https://pokeapi.co/api/v2/pokemon/"  #cambiar nombre a url a urlPoke
+    urlPoke= "https://pokeapi.co/api/v2/pokemon/"  
 
-    nom_hab = str(input("\nIngrese el id o un nombre de habitat: ")) #agregar ID habitat
+    nom_hab = str(input("\nIngrese el id o un nombre de habitat: ")) 
 
     def url_habitat(nom_hab):
         return requests.get(url_hab + nom_hab).json()
 
-    def urlPokemon(namePoke):  #cambiar el nombre de name_pokemon  a   namePoke
+    def urlPokemon(namePoke):  
         return requests.get(urlPoke+namePoke).json()
 
 
@@ -182,7 +179,7 @@ if option == 4:
             print("Habilidad:" + i['ability']['name'])    
             
     def get_image_from_rp(rp_pokemon):
-        print(rp_pokemon['sprites']["front_default"])
+        print("Imagen:" + rp_pokemon['sprites']["front_default"])
 
 
     def info_habitat(nom_hab):
@@ -197,7 +194,7 @@ if option == 4:
 
 
 if option == 5:
-    print("-----------------------------OPCION 5------------------------------")
+    print("--------------------------OPCION 5--------------------------")
 
     print("""
                                 TIPOS DE POKEMON
@@ -213,12 +210,12 @@ if option == 5:
     url = "https://pokeapi.co/api/v2/type/"
     url_poke= "https://pokeapi.co/api/v2/pokemon/"
 
-    elija = str(input("Inserte la ID o nombre de un Tipo de pokemon:  "))
+    choose = str(input("Inserte la ID o nombre de un Tipo de pokemon:  "))
 
 
 
-    def url_tipo(elija):
-        return requests.get(url+elija).json() 
+    def url_type(elija):
+        return requests.get(url+choose).json() 
     def url_pokemon(pokemon):
         return requests.get(url_poke+pokemon).json() 
 
@@ -226,7 +223,7 @@ if option == 5:
 
 
 
-    def tipos(tipo_response):
+    def types(tipo_response):
         for i in tipo_response['pokemon']:
             print(i['pokemon']['name'])
             habilidades(url_pokemon(i['pokemon']['name']))
@@ -238,13 +235,13 @@ if option == 5:
             print("Habilidad:", i['ability']['name'])
 
     def imagen(poke_response):  
-        print(poke_response['sprites']['front_default'])
+        print("Imagen:" + poke_response['sprites']['front_default'])
 
 
     def info_general(elija):
-        tipo_response = url_tipo(elija)
-        print("\nTipo:", elija)
-        tipos(tipo_response)
+        type_response = url_type(choose)
+        print("\nTipo:", choose)
+        types(type_response)
 
 
-    info_general(elija)
+    info_general(choose)
