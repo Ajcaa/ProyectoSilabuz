@@ -21,30 +21,22 @@ class Libro:
         with open(file_libro, encoding='utf-8-sig') as file:
             fileLibro = csv.reader(file)
             
-            #data = [i for i in fileLibro]
-            #print(data)
+
             for i in fileLibro:
                 print (i[1:5])
             
-            #cont = 0
-            """
-            for i in fileLibro:
-                for j in range(cant_column):
-                    #print("\n"+i[j],end='')
-                    print(i[j]+"     ",end=' ')
-                    #print("\n")
-                #cont += 1
-                #print(i)
-            """
-            #print (fileLibro)
-            #print(file.read())
-    
-    """
-    def readFile(self):
-        with open(file,'r') as file:
-            libros = csv.reader(file)
-            for i in libros:
-                print(i)
-    """
+    def orderFile(self):        
+        with open(file_libro, encoding='utf-8-sig') as file:
+            next(file)
+            fileLibro = csv.reader(file)
+
+            lista = []
+            for row in fileLibro:
+                if row[1]:
+                    lista.append(row[1])    
+                    lista.sort()
+            print(lista)
+            file.close()
 
 print(Libro.readFile(file_libro))
+print(Libro.orderFile(file_libro))
