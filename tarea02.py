@@ -46,16 +46,16 @@ if option == 1:
 
     def get_generation_from_response(response_generation):
         for i in response_generation['pokemon_species']:
-            print(f"\nNombre: " + i['name'])
+            print(f"\nNombre: ", i['name'])
             get_abilities_from_response(api_get_request_pokemon(i['name']))
             get_image_from_response(api_get_request_pokemon(i['name']))
             
     def get_abilities_from_response(response_pokemon):
         for i in response_pokemon['abilities']:
-            print("Habilidad:" + i['ability']['name'])    
+            print("Habilidad:", i['ability']['name'])    
             
     def get_image_from_response(response_pokemon):
-        print("Imagen:" + response_pokemon['sprites']["front_default"])
+        print("Imagen:", response_pokemon['sprites']["front_default"])
 
 
     def get_info_from_generation(num_generation):
@@ -113,16 +113,16 @@ if option == 3:
 
     def get_ability_from_rsp(response_ability):
         for i in response_ability['pokemon']:
-            print(f"\nNombre: " + i['pokemon']['name'])
+            print(f"\nNombre: ", i['pokemon']['name'])
             get_abilities_from_rsp(request_pokemon(i['pokemon']['name']))
             get_image_from_rsp(request_pokemon(i['pokemon']['name']))
             
     def get_abilities_from_rsp(rsp_pokemon):
         for i in rsp_pokemon['abilities']:
-            print("Habilidad:" + i['ability']['name'])    
+            print("Habilidad:", i['ability']['name'])    
             
     def get_image_from_rsp(rsp_pokemon):
-        print("Imagen:" + rsp_pokemon['sprites']["front_default"])
+        print("Imagen:", rsp_pokemon['sprites']["front_default"])
 
 
     def get_info_from_ability(nom_ability):
@@ -170,16 +170,16 @@ if option == 4:
 
     def habitat_from_rp(response_habitat):
         for i in response_habitat['pokemon_species']:
-            print(f"\nNombre: " + i['name'])
+            print(f"\nNombre: ", i['name'])
             abilities_from_rp(urlPokemon(i['name']))
             get_image_from_rp(urlPokemon(i['name']))
             
     def abilities_from_rp(rp_pokemon):
         for i in rp_pokemon['abilities']:
-            print("Habilidad:" + i['ability']['name'])    
+            print("Habilidad:", i['ability']['name'])    
             
     def get_image_from_rp(rp_pokemon):
-        print("Imagen:" + rp_pokemon['sprites']["front_default"])
+        print("Imagen:", rp_pokemon['sprites']["front_default"])
 
 
     def info_habitat(nom_hab):
@@ -225,7 +225,7 @@ if option == 5:
 
     def types(tipo_response):
         for i in tipo_response['pokemon']:
-            print(i['pokemon']['name'])
+            print("\nNombre: ",i['pokemon']['name'])
             habilidades(url_pokemon(i['pokemon']['name']))
             imagen(url_pokemon(i['pokemon']['name']))
 
@@ -235,7 +235,7 @@ if option == 5:
             print("Habilidad:", i['ability']['name'])
 
     def imagen(poke_response):  
-        print("Imagen:" + poke_response['sprites']['front_default'])
+        print("Imagen:", poke_response['sprites']['front_default'])
 
 
     def info_general(elija):
