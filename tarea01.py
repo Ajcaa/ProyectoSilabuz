@@ -26,7 +26,7 @@ class Libro:
             
 
             for i in fileLibro:
-                print (i[1:5])
+                print (i[0:6])
 
     #-------OPCION 3------#
     def addFile(self):
@@ -129,19 +129,19 @@ class Libro:
 
         search7 = int(input("Elija una opcion de busqueda de informacion de  libros: \n1) Por autor \n2) Por editorial \n3) Por genero\n"))
         if search7 == 1:
-            print('Tenemos los siguientes ISBN:  ', '\n', author)
+            print('Tenemos los siguientes autores:  ', '\n', author)
             search7_book = input('Ingrese el autor de un libro:  ').title()
             forAuthor = datos[datos['Autor(es)'] == search7_book]
             print(forAuthor.head())
 
         if search7 == 2:
-            print('Tenemos los siguientes ISBN:  ', '\n', editorial)
+            print('Tenemos los siguientes editoriales:  ', '\n', editorial)
             search7_book = input('Ingrese la editorial:  ')
             forEditorial = datos[datos['Editorial'] == search7_book]
             print(forEditorial.head())
 
         if search7 == 3:
-            print('Tenemos los siguientes ISBN:  ', '\n', genre)
+            print('Tenemos los siguientes generos:  ', '\n', genre)
             search7_book = input('Ingrese el genero:  ').capitalize()
             forGenre = datos[datos['Genero'] == search7_book]
             print(forGenre.head())
@@ -169,7 +169,7 @@ class Libro:
         df.loc[df['Id'] == valId, "Autor(es)"] = valAutor
 
         
-        df.to_csv(file_libro)
+        df.to_csv(file_libro, index=False)
         print("Se actualizo el libro")
 
 
@@ -183,13 +183,13 @@ class Libro:
         if save_book == "1":
             bookcsv = pd.read_csv(file_libro, on_bad_lines='skip')
             namecsv = input("Ingrese un nombre para el nuevo archivo en csv:  ")
-            bookcsv.to_csv(f'{namecsv}.csv')
+            bookcsv.to_csv(f'{namecsv}.csv', index=False)
             print('El archivo', namecsv, 'ha sido creado')
 
         if save_book == "2":
             bookcsv = pd.read_csv(file_libro, on_bad_lines='skip')
             nametxt = input("Ingrese un nombre para el nuevo archivo en txt:  ")
-            bookcsv.to_csv(f'{nametxt}.txt')
+            bookcsv.to_csv(f'{nametxt}.txt', index=False)
             print('El archivo', nametxt, 'ha sido creado')
 
 
@@ -218,31 +218,31 @@ while play:
     if start == 1:
         print("Se ha leido el archivo libros.csv")
     if start == 2:
-        print(Libro.readFile(file_libro))
+        Libro.readFile(file_libro)
 
     if start == 3:
-        print(Libro.addFile(file_libro))
+        Libro.addFile(file_libro)
 
     if start == 4:   
-        print(Libro.deleteFile(file_libro))
+        Libro.deleteFile(file_libro)
 
     if start == 5:
-        print(Libro.searchFile(file_libro))
+        Libro.searchFile(file_libro)
 
     if start == 6:
-        print(Libro.orderFile(file_libro))
+        Libro.orderFile(file_libro)
 
     if start == 7:
-        print(Libro.searchFile7(file_libro))
+        Libro.searchFile7(file_libro)
 
     if start == 9:
-        print(Libro.editFile(file_libro))
+        Libro.editFile(file_libro)
 
     if start == 10:
-        print(Libro.discoDuro(file_libro))
+        Libro.discoDuro(file_libro)
 
     if start == 8:
-        print(Libro.searchAuthorExtense(file_libro))
+        Libro.searchAuthorExtense(file_libro)
 
     continuee = input("Desea continuar? (Si/No):  ").lower()    
     if continuee != "si":
