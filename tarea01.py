@@ -146,6 +146,36 @@ class Libro:
             print(forGenre.head())
 
 
+    #-------OPCION 9------#
+    def editFile(self):
+        df = pd.read_csv(file_libro) 
+
+        valId = input("Ingrese que libro actualizar por ID:  ")
+
+        valTitle =  input("Ingrese el nuevo titulo:  ")
+        df.loc[df['Id'] == valId, "Titulo"] = valTitle
+
+        valGenre =  input("Ingrese el nuevo genero:  ")
+        df.loc[df['Id'] == valId, "Genero"] = valGenre
+
+        valISBN =  input("Ingrese el nuevo ISBN:  ")
+        df.loc[df['Id'] == valId, "ISBN"] = valISBN
+
+        valEditorial =  input("Ingrese la nueva editorial:  ")
+        df.loc[df['Id'] == valId, "Editorial"] = valEditorial
+
+        valAutor =  input("Ingrese el nuevo autor :  ")
+        df.loc[df['Id'] == valId, "Autor(es)"] = valAutor
+
+        
+        df.to_csv(file_libro)
+        print("Se actualizo el libro")
+
+
+
+
+
+
     #-------OPCION 10------#
     def discoDuro(self):
         save_book = input("Elija un formato para guardar tus libros" "\n1) csv 2) txt)  ")
@@ -171,3 +201,4 @@ print(Libro.searchFile7(file_libro))
 print(Libro.discoDuro(file_libro))
 print(Libro.addFile(file_libro))
 print(Libro.deleteFile(file_libro))
+print(Libro.editFile(file_libro))
