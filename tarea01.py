@@ -6,6 +6,7 @@ file_libro = "libros.csv"
 cant_max_libro = 1
 cant_column = 6
 cant_row = 3
+play = True
 
 class Libro:
            
@@ -194,11 +195,56 @@ class Libro:
 
 
 
-print(Libro.readFile(file_libro))
-print(Libro.orderFile(file_libro))
-print(Libro.searchFile(file_libro))
-print(Libro.searchFile7(file_libro))
-print(Libro.discoDuro(file_libro))
-print(Libro.addFile(file_libro))
-print(Libro.deleteFile(file_libro))
-print(Libro.editFile(file_libro))
+while play:
+    print("""
+                        Opción 1: Leer archivo de disco duro (.txt o csv) que carga 3 libros.
+                        Opción 2: Listar libros.
+                        Opción 3: Agregar libro.
+                        Opción 4: Eliminar libro.
+                        Opción 5: Buscar libro por ISBN o por título.
+                        Opción 6: Ordenar libros por título.
+                        Opción 7: Buscar libros por autor, editorial o género.
+                        Opción 8: Buscar libros por número de autores. 
+                        Opción 9: Editar o actualizar datos de un libro (título, género, ISBN, editorial y autores).
+                        Opción 10: Guardar libros en archivo de disco duro (.txt o csv).
+    """)
+
+    start = int(input("                    Elija un opcion:  "))
+
+    while start not in(1,2,3,4,5,6,7,8,9,10):
+        start = int(input("Elija una opcion valida:  "))
+
+
+    if start == 1:
+        print("Se ha leido el archivo libros.csv")
+    if start == 2:
+        print(Libro.readFile(file_libro))
+
+    if start == 3:
+        print(Libro.addFile(file_libro))
+
+    if start == 4:   
+        print(Libro.deleteFile(file_libro))
+
+    if start == 5:
+        print(Libro.searchFile(file_libro))
+
+    if start == 6:
+        print(Libro.orderFile(file_libro))
+
+    if start == 7:
+        print(Libro.searchFile7(file_libro))
+
+    if start == 9:
+        print(Libro.editFile(file_libro))
+
+    if start == 10:
+        print(Libro.discoDuro(file_libro))
+
+    if start == 8:
+        print(Libro.searchAuthorExtense(file_libro))
+
+    continuee = input("Desea continuar? (Si/No):  ").lower()    
+    if continuee != "si":
+        print("Fin del programa")
+        play = False
