@@ -3,11 +3,103 @@ from os import system
 
 again = True
 
+pokeapi_generation = "https://pokeapi.co/api/v2/generation/"
+pokeapi_pokemon= "https://pokeapi.co/api/v2/pokemon/" 
+pokeapi_ability = "https://pokeapi.co/api/v2/ability/"
+url_hab = "https://pokeapi.co/api/v2/pokemon-habitat/"
+url_type = "https://pokeapi.co/api/v2/type/"
+
+
+
+# Funcion Menu
 def menu(answerMenu,again):
     system("cls")
     if answerMenu != "y":
         again = False
     return again
+
+# Obtiene el request de Generation
+def api_get_request_generation(num_generation):
+    return requests.get(pokeapi_generation+num_generation).json()
+        
+# Obtiene el request de Pokemon
+def api_get_request_pokemon(name_pokemon):
+    return requests.get(pokeapi_pokemon+name_pokemon).json()
+
+# Obtiene el request de Habilidad
+def api_get_request_ability(nom_ability):
+    return requests.get(pokeapi_ability+nom_ability).json()      
+
+# Obtiene el request de Habitat
+def api_get_request_habitat(nom_hab):
+    return requests.get(url_hab + nom_hab).json()  
+
+# Obtiene el request de Types
+def api_get_request_type(nom_type):
+    return requests.get(url_type+nom_type).json() 
+
+
+# Obtiene los datos de la generacion del requests   
+def get_generation_from_response(response_generation):
+    for i in response_generation['pokemon_species']:
+        print(f"\nNombre: ", i['name'])
+        get_abilities_from_response(api_get_request_pokemon(i['name']))
+        get_image_from_response(api_get_request_pokemon(i['name']))
+         
+# Obtiene los datos de las habilidades del requests         
+def get_abilities_from_response(response_pokemon):
+    for i in response_pokemon['abilities']:
+        print("Habilidad:", i['ability']['name'])  
+      
+# Obtiene los datos de la url-imagen del requests           
+def get_image_from_response(response_pokemon):
+    print("Imagen:", response_pokemon['sprites']["front_default"])
+            
+# Obtiene los datos de las habilidades del requests 
+def get_ability_from_response(response_ability):
+            for i in response_ability['pokemon']:
+                print(f"\nNombre: ", i['pokemon']['name'])
+                get_abilities_from_response(api_get_request_pokemon(i['pokemon']['name']))
+                get_image_from_response(api_get_request_pokemon(i['pokemon']['name'])) 
+
+# Obtiene los datos del habitat del requests 
+def habitat_from_rp(response_habitat):
+    for i in response_habitat['pokemon_species']:
+        print(f"\nNombre: ", i['name'])
+        get_abilities_from_response(api_get_request_pokemon(i['name']))
+        get_image_from_response(api_get_request_pokemon(i['name'])) 
+        
+# Obtiene los datos de los tipos del requests         
+def types(tipo_response):
+    for i in tipo_response['pokemon']:
+        print("\nNombre: ",i['pokemon']['name'])
+        get_abilities_from_response(api_get_request_pokemon(i['pokemon']['name']))
+        get_image_from_response(api_get_request_pokemon(i['pokemon']['name']))
+        
+
+# Obtiene todos los datos finales de generacion  
+def get_info_from_generation(num_generation):
+    response_generation = api_get_request_generation(num_generation)
+    print(f"\nGeneración {num_generation}:")
+    get_generation_from_response(response_generation)
+
+# Obtiene todos los datos finales de las habilidades  
+def get_info_from_ability(nom_ability):
+    response_ability = api_get_request_ability(nom_ability)
+    print(f"\nHabilidad: {nom_ability}:")
+    get_ability_from_response(response_ability)
+    
+# Obtiene todos los datos finales del habitat 
+def info_habitat(nom_hab):
+    response_habitat = api_get_request_habitat(nom_hab) 
+    print("\nHabitat:",nom_hab)       
+    habitat_from_rp(response_habitat)
+    
+
+def get_info_from_type(nom_type):
+    type_response = api_get_request_type(nom_type)
+    print("\nTipo:", nom_type)
+    types(type_response)
 
 while again == True:
 
@@ -31,8 +123,6 @@ while again == True:
     if option == 1:
 
         print("---------------------------*-OPCION 1-----------------------------")
-
-
         print("""
                                     GENERACIONES DE POKEMON
                                         1            5         
@@ -42,49 +132,15 @@ while again == True:
                                                 
     """
         )
-
         
-
-        pokeapi_generation = "https://pokeapi.co/api/v2/generation/"
-        pokeapi_pokemon= "https://pokeapi.co/api/v2/pokemon/"  
         num_generation = str(input("\nIngrese la generación: "))
-
-            
-
-
-
-        def api_get_request_generation(num_generation):
-            return requests.get(pokeapi_generation+num_generation).json()
-
-        def api_get_request_pokemon(name_pokemon):
-            return requests.get(pokeapi_pokemon+name_pokemon).json()
-
-        def get_generation_from_response(response_generation):
-            for i in response_generation['pokemon_species']:
-                print(f"\nNombre: ", i['name'])
-                get_abilities_from_response(api_get_request_pokemon(i['name']))
-                get_image_from_response(api_get_request_pokemon(i['name']))
-                
-        def get_abilities_from_response(response_pokemon):
-            for i in response_pokemon['abilities']:
-                print("Habilidad:", i['ability']['name'])    
-                
-        def get_image_from_response(response_pokemon):
-            print("Imagen:", response_pokemon['sprites']["front_default"])
-
-
-        def get_info_from_generation(num_generation):
-            response_generation = api_get_request_generation(num_generation)
-            print(f"\nGeneración {num_generation}:")
-            get_generation_from_response(response_generation)
-            
-            
         get_info_from_generation (num_generation)
 
         retornMenu = input("\n¿Deseas volver al menu? [y/n]: ").lower()
         again=menu(retornMenu,again)
 
-
+    if option == 2:
+        pass
 
 
     if option == 3:
@@ -102,39 +158,7 @@ while again == True:
         """
         )
 
-
-
-        pokeapi_ability = "https://pokeapi.co/api/v2/ability/"
-        pokeapi_poke= "https://pokeapi.co/api/v2/pokemon/"  
         nom_ability = str(input("\nIngrese el ID o nombre de la habilidad: "))
-
-
-        def request_ability(nom_ability):
-            return requests.get(pokeapi_ability+nom_ability).json()
-
-        def request_pokemon(name_poke):
-            return requests.get(pokeapi_poke+name_poke).json()
-
-        def get_ability_from_rsp(response_ability):
-            for i in response_ability['pokemon']:
-                print(f"\nNombre: ", i['pokemon']['name'])
-                get_abilities_from_rsp(request_pokemon(i['pokemon']['name']))
-                get_image_from_rsp(request_pokemon(i['pokemon']['name']))
-                
-        def get_abilities_from_rsp(rsp_pokemon):
-            for i in rsp_pokemon['abilities']:
-                print("Habilidad:", i['ability']['name'])    
-                
-        def get_image_from_rsp(rsp_pokemon):
-            print("Imagen:", rsp_pokemon['sprites']["front_default"])
-
-
-        def get_info_from_ability(nom_ability):
-            response_ability = request_ability(nom_ability)
-            print(f"\nHabilidad: {nom_ability}:")
-            get_ability_from_rsp(response_ability)
-            
-            
         get_info_from_ability (nom_ability)
 
         retornMenu = input("\n¿Deseas volver al menu? [y/n]: ").lower()
@@ -158,41 +182,7 @@ while again == True:
         """
         )
 
-
-        url_hab = "https://pokeapi.co/api/v2/pokemon-habitat/"
-        urlPoke= "https://pokeapi.co/api/v2/pokemon/"  
-
         nom_hab = str(input("\nIngrese el id o un nombre de habitat: ")) 
-
-        def url_habitat(nom_hab):
-            return requests.get(url_hab + nom_hab).json()
-
-        def urlPokemon(namePoke):  
-            return requests.get(urlPoke+namePoke).json()
-
-
-
-
-        def habitat_from_rp(response_habitat):
-            for i in response_habitat['pokemon_species']:
-                print(f"\nNombre: ", i['name'])
-                abilities_from_rp(urlPokemon(i['name']))
-                get_image_from_rp(urlPokemon(i['name']))
-                
-        def abilities_from_rp(rp_pokemon):
-            for i in rp_pokemon['abilities']:
-                print("Habilidad:", i['ability']['name'])    
-                
-        def get_image_from_rp(rp_pokemon):
-            print("Imagen:", rp_pokemon['sprites']["front_default"])
-
-
-        def info_habitat(nom_hab):
-            response_habitat = url_habitat(nom_hab) 
-            print("\nHabitat:",nom_hab)       
-            habitat_from_rp(response_habitat)
-            
-            
         info_habitat(nom_hab)
 
         retornMenu = input("\n¿Deseas volver al menu? [y/n]: ").lower()
@@ -213,45 +203,8 @@ while again == True:
         """
         )
 
-
-        url = "https://pokeapi.co/api/v2/type/"
-        url_poke= "https://pokeapi.co/api/v2/pokemon/"
-
-        choose = str(input("Inserte la ID o nombre de un Tipo de pokemon:  "))
-
-
-
-        def url_type(elija):
-            return requests.get(url+choose).json() 
-        def url_pokemon(pokemon):
-            return requests.get(url_poke+pokemon).json() 
-
-
-
-
-
-        def types(tipo_response):
-            for i in tipo_response['pokemon']:
-                print("\nNombre: ",i['pokemon']['name'])
-                habilidades(url_pokemon(i['pokemon']['name']))
-                imagen(url_pokemon(i['pokemon']['name']))
-
-
-        def habilidades(poke_response):
-            for i in poke_response['abilities']:
-                print("Habilidad:", i['ability']['name'])
-
-        def imagen(poke_response):  
-            print("Imagen:", poke_response['sprites']['front_default'])
-
-
-        def info_general(elija):
-            type_response = url_type(choose)
-            print("\nTipo:", choose)
-            types(type_response)
-
-
-        info_general(choose)
+        nom_type = str(input("Inserte la ID o nombre de un Tipo de pokemon:  "))
+        get_info_from_type(nom_type)
 
         retornMenu = input("\n¿Deseas volver al menu? [y/n]: ").lower()
         again=menu(retornMenu,again)
