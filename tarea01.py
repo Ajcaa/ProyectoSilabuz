@@ -61,9 +61,38 @@ class Libro:
 
 
 
+    def searchFile7(self):
+        datos = pd.read_csv(file_libro)
+        author = datos['Autor(es)']
+        editorial = datos['Editorial']
+        genre = datos['Genero']
+
+        search7 = int(input("Elija una opcion de busqueda de informacion de  libros: \n1) Por autor \n2) Por editorial \n3) Por genero\n"))
+        if search7 == 1:
+            print('Tenemos los siguientes ISBN:  ', '\n', author)
+            search7_book = input('Ingrese el autor de un libro:  ').title()
+            forAuthor = datos[datos['Autor(es)'] == search7_book]
+            print(forAuthor.head())
+
+        if search7 == 2:
+            print('Tenemos los siguientes ISBN:  ', '\n', editorial)
+            search7_book = input('Ingrese la editorial:  ')
+            forEditorial = datos[datos['Editorial'] == search7_book]
+            print(forEditorial.head())
+
+        if search7 == 3:
+            print('Tenemos los siguientes ISBN:  ', '\n', genre)
+            search7_book = input('Ingrese el genero:  ').capitalize()
+            forGenre = datos[datos['Genero'] == search7_book]
+            print(forGenre.head())
+
+
+
 
 
 
 
 print(Libro.readFile(file_libro))
 print(Libro.orderFile(file_libro))
+print(Libro.searchFile(file_libro))
+print(Libro.searchFile7(file_libro))
