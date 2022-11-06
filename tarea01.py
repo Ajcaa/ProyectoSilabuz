@@ -17,6 +17,8 @@ class Libro:
         self.editorial = editorial
         self.autor = autor
     
+
+    #-------OPCION 2------#
     def readFile(self):
         with open(file_libro, encoding='utf-8-sig') as file:
             fileLibro = csv.reader(file)
@@ -25,7 +27,7 @@ class Libro:
             for i in fileLibro:
                 print (i[1:5])
 
-
+    #-------OPCION 3------#
     def addFile(self):
 
         new_list = [] 
@@ -59,8 +61,28 @@ class Libro:
             file.close()
 
 
+    #-------OPCION 4------#
+    def deleteFile(self):
+        
+        df = pd.read_csv(file_libro,on_bad_lines='skip')
+        print("         ----------------------------------Libros actuales----------------------------------")
+        print(df)
+        cual = input('Elija que libro eliminar por id:  ')
+
+        
+        df.set_index("Id", inplace=True)
+        df = df.drop(cual)
+        df.to_csv(file_libro,)
+        print("         ----------------------------Se ha elimado el libro. Libros actuales----------------------------")
+        print(df)
 
 
+
+
+
+
+
+    #-------OPCION 6------#
     def orderFile(self):        
         with open(file_libro, encoding='utf-8-sig') as file:
             next(file)
@@ -75,7 +97,7 @@ class Libro:
             print(lista)
             file.close()
 
-
+    #-------OPCION 5------#
     def searchFile(self):
         datos = pd.read_csv(file_libro)
         title = datos['Titulo']
@@ -97,7 +119,7 @@ class Libro:
 
 
 
-
+    #-------OPCION 7------#
     def searchFile7(self):
         datos = pd.read_csv(file_libro)
         author = datos['Autor(es)']
@@ -124,6 +146,7 @@ class Libro:
             print(forGenre.head())
 
 
+    #-------OPCION 10------#
     def discoDuro(self):
         save_book = input("Elija un formato para guardar tus libros" "\n1) csv 2) txt)  ")
         if save_book == "1":
@@ -147,3 +170,4 @@ print(Libro.searchFile(file_libro))
 print(Libro.searchFile7(file_libro))
 print(Libro.discoDuro(file_libro))
 print(Libro.addFile(file_libro))
+print(Libro.deleteFile(file_libro))
