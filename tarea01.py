@@ -1,4 +1,5 @@
 import csv
+from csv import *
 import pandas as pd
 
 file_libro = "libros.csv"
@@ -23,7 +24,43 @@ class Libro:
 
             for i in fileLibro:
                 print (i[1:5])
+
+
+    def addFile(self):
+
+        new_list = [] 
+        with open(file_libro, "a", newline="") as file:
             
+                      
+            new_file = writer(file)
+            
+            u = input("Agregue una ID para el nuevo libro:  ").upper()
+            new_list.append(u)            
+
+
+            v = input("Agregue un titulo para el nuevo libro:  ")
+            new_list.append(v)
+                    
+            w =input("Agregue un genero para el nuevo libro:  ")
+            new_list.append(w)
+
+            x =input("Agregue un ISBN para el nuevo libro:  ")
+            new_list.append(x)
+
+            y = input("Agregue un editoral para el nuevo libro:  ")
+            new_list.append(y)
+
+            z = input("Agregue un(os) autores para el nuevo libro:  ")
+            new_list.append(z)
+
+
+            new_file.writerow(new_list)
+            print("         -------------------------------Se agrego un nuevo libro-------------------------------")
+            file.close()
+
+
+
+
     def orderFile(self):        
         with open(file_libro, encoding='utf-8-sig') as file:
             next(file)
@@ -109,3 +146,4 @@ print(Libro.orderFile(file_libro))
 print(Libro.searchFile(file_libro))
 print(Libro.searchFile7(file_libro))
 print(Libro.discoDuro(file_libro))
+print(Libro.addFile(file_libro))
