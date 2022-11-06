@@ -1,4 +1,5 @@
 import csv
+import pandas as pd
 
 file_libro = "libros.csv"
 cant_max_libro = 1
@@ -6,9 +7,7 @@ cant_column = 6
 cant_row = 3
 
 class Libro:
-    
-    
-    
+           
     def __init__(self,id,titulo,genero,isbn,editorial,autor):
         self.id = id
         self.titulo = titulo
@@ -35,8 +34,36 @@ class Libro:
                 if row[1]:
                     lista.append(row[1])    
                     lista.sort()
+            h = input("Pulse Enter para ver los libros ordenados:  ")
             print(lista)
             file.close()
+
+
+    def searchFile(self):
+        datos = pd.read_csv(file_libro)
+        title = datos['Titulo']
+        ISBN_book = datos['ISBN']
+        
+        search = int(input("Elija una opcion de busqueda de informacion de  libros: \n1) Por Titulo \n2) Por ISBN\n  "))
+
+        if search == 1: 
+            print('Tenemos los siguientes libros:', '\n', title)
+            search_book = input("Ingrese el titulo de un libro:  ").capitalize()             
+            fortitulo = datos[datos['Titulo'] == search_book]
+            print(fortitulo.head())
+        if search == 2:
+            print('Tenemos los siguientes ISBN:  ', '\n', ISBN_book)
+            search_ISBN = input('Ingresa el ISBN de un libro:  ')
+            forISBN = datos[datos['ISBN'] == search_ISBN]
+            print(forISBN.head())
+
+
+
+
+
+
+
+
 
 print(Libro.readFile(file_libro))
 print(Libro.orderFile(file_libro))
