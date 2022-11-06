@@ -87,7 +87,19 @@ class Libro:
             print(forGenre.head())
 
 
+    def discoDuro(self):
+        save_book = input("Elija un formato para guardar tus libros" "\n1) csv 2) txt)  ")
+        if save_book == "1":
+            bookcsv = pd.read_csv(file_libro, on_bad_lines='skip')
+            namecsv = input("Ingrese un nombre para el nuevo archivo en csv:  ")
+            bookcsv.to_csv(f'{namecsv}.csv')
+            print('El archivo', namecsv, 'ha sido creado')
 
+        if save_book == "2":
+            bookcsv = pd.read_csv(file_libro, on_bad_lines='skip')
+            nametxt = input("Ingrese un nombre para el nuevo archivo en txt:  ")
+            bookcsv.to_csv(f'{nametxt}.txt')
+            print('El archivo', nametxt, 'ha sido creado')
 
 
 
@@ -96,3 +108,4 @@ print(Libro.readFile(file_libro))
 print(Libro.orderFile(file_libro))
 print(Libro.searchFile(file_libro))
 print(Libro.searchFile7(file_libro))
+print(Libro.discoDuro(file_libro))
