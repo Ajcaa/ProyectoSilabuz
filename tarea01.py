@@ -145,6 +145,18 @@ class Libro:
             search7_book = input('Ingrese el genero:  ').capitalize()
             forGenre = datos[datos['Genero'] == search7_book]
             print(forGenre.head())
+            
+
+    #-------OPCION 8------#
+    def searchAuthorExtense(self):
+        datos = pd.read_csv(file_libro)
+        
+        search_author = input('Ingrese el autor de un libro:  ').title()
+        forAuthor = datos[datos['Autor(es)'] == search_author]
+        print(forAuthor.head())
+    
+    def __str__(self) -> str:
+        return f"Id: {self.id}, Título: {self.titulo}, Género: {self.genero}, ISBN: {self.isbn}, Editorial: {self.editorial}, Autor(es): {self.autor_es}"
 
 
     #-------OPCION 9------#
