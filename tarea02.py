@@ -9,8 +9,6 @@ pokeapi_ability = "https://pokeapi.co/api/v2/ability/"
 url_hab = "https://pokeapi.co/api/v2/pokemon-habitat/"
 url_type = "https://pokeapi.co/api/v2/type/"
 
-
-
 # Funcion Menu
 def menu(answerMenu,again):
     system("cls")
@@ -42,14 +40,15 @@ def api_get_request_type(nom_type):
 # Obtiene los datos de la generacion del requests   
 def get_generation_from_response(response_generation):
     for i in response_generation['pokemon_species']:
-        print(f"\nNombre: ", i['name'])
-        get_abilities_from_response(api_get_request_pokemon(i['name']))
-        get_image_from_response(api_get_request_pokemon(i['name']))
-         
+        if requests.get(pokeapi_pokemon+i['name']).status_code != 404:
+            print(f"\nNombre: ", i['name'].capitalize())
+            get_abilities_from_response(api_get_request_pokemon(i['name']))
+            get_image_from_response(api_get_request_pokemon(i['name']))
+        
 # Obtiene los datos de las habilidades del requests         
 def get_abilities_from_response(response_pokemon):
     for i in response_pokemon['abilities']:
-        print("Habilidad:", i['ability']['name'])  
+        print("Habilidad:", i['ability']['name'].capitalize())  
       
 # Obtiene los datos de la url-imagen del requests           
 def get_image_from_response(response_pokemon):
@@ -57,25 +56,32 @@ def get_image_from_response(response_pokemon):
             
 # Obtiene los datos de las habilidades del requests 
 def get_ability_from_response(response_ability):
-            for i in response_ability['pokemon']:
-                print(f"\nNombre: ", i['pokemon']['name'])
-                get_abilities_from_response(api_get_request_pokemon(i['pokemon']['name']))
-                get_image_from_response(api_get_request_pokemon(i['pokemon']['name'])) 
+    for i in response_ability['pokemon']:
+        print(f"\nNombre: ", i['pokemon']['name'].capitalize())
+        get_abilities_from_response(api_get_request_pokemon(i['pokemon']['name']))
+        get_image_from_response(api_get_request_pokemon(i['pokemon']['name'])) 
 
 # Obtiene los datos del habitat del requests 
 def habitat_from_rp(response_habitat):
     for i in response_habitat['pokemon_species']:
-        print(f"\nNombre: ", i['name'])
+        print(f"\nNombre: ", i['name'].capitalize())
         get_abilities_from_response(api_get_request_pokemon(i['name']))
         get_image_from_response(api_get_request_pokemon(i['name'])) 
         
 # Obtiene los datos de los tipos del requests         
 def types(tipo_response):
     for i in tipo_response['pokemon']:
-        print("\nNombre: ",i['pokemon']['name'])
+        print("\nNombre: ",i['pokemon']['name'].capitalize())
         get_abilities_from_response(api_get_request_pokemon(i['pokemon']['name']))
         get_image_from_response(api_get_request_pokemon(i['pokemon']['name']))
-        
+
+# Obtiene los datos de las formas del requests    
+def get_form_from_response(response_form):
+    for i in response_form['forms']:
+        print("Forma: ",i['name'].capitalize())
+    get_abilities_from_response(api_get_request_pokemon(response_form['name']))
+    get_image_from_response(api_get_request_pokemon(response_form['name'])) 
+    
 
 # Obtiene todos los datos finales de generacion  
 def get_info_from_generation(num_generation):
@@ -95,11 +101,19 @@ def info_habitat(nom_hab):
     print("\nHabitat:",nom_hab)       
     habitat_from_rp(response_habitat)
     
-
+# Obtiene todos los datos finales de los tipos
 def get_info_from_type(nom_type):
     type_response = api_get_request_type(nom_type)
     print("\nTipo:", nom_type)
     types(type_response)
+    
+# Obtiene todos los datos finales de las formas
+def get_info_from_form(num_form):
+    #response_form = api_get_request_form(num_form)
+    response_form = api_get_request_pokemon(num_form)
+    print("\nPokemon:",num_form)
+    get_form_from_response(response_form)
+    
 
 while again == True:
 
@@ -130,17 +144,26 @@ while again == True:
                                         3            7      
                                         4            8
                                                 
-    """
+        """
         )
         
         num_generation = str(input("\nIngrese la generación: "))
         get_info_from_generation (num_generation)
-
+        
         retornMenu = input("\n¿Deseas volver al menu? [y/n]: ").lower()
         again=menu(retornMenu,again)
+            
+        
 
     if option == 2:
-        pass
+        print("---------------------------*-OPCION 2-----------------------------")
+        print("Ejemplos: \n412 <-> burmy \n421 <-> cherrim \n493 <-> arceus \n716 <-> xerneas")
+        
+        num_form = str(input("\nIngrese el id o un nombre del pokemon: "))
+        get_info_from_form (num_form)
+        
+        retornMenu = input("\n¿Deseas volver al menu? [y/n]: ").lower()
+        again=menu(retornMenu,again)
 
 
     if option == 3:
