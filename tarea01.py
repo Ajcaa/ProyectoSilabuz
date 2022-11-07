@@ -32,28 +32,28 @@ class Libro:
     def addFile(self):
 
         new_list = [] 
-        with open(file_libro, "a", newline="") as file:
+        with open(file_libro, "a", newline="\n") as file:
             
                       
             new_file = writer(file)
             
-            u = input("Agregue una ID para el nuevo libro:  ").upper()
+            u = input("\nAgregue una ID para el nuevo libro:  ")
             new_list.append(u)            
 
 
-            v = input("Agregue un titulo para el nuevo libro:  ")
+            v = input("Agregue un titulo para el nuevo libro:  ").capitalize()
             new_list.append(v)
                     
-            w =input("Agregue un genero para el nuevo libro:  ")
+            w =input("Agregue un genero para el nuevo libro:  ").capitalize()
             new_list.append(w)
 
             x =input("Agregue un ISBN para el nuevo libro:  ")
             new_list.append(x)
 
-            y = input("Agregue un editoral para el nuevo libro:  ")
+            y = input("Agregue un editoral para el nuevo libro:  ").title()
             new_list.append(y)
 
-            z = input("Agregue un(os) autores para el nuevo libro:  ")
+            z = input("Agregue un autor para el nuevo libro:  ").title()
             new_list.append(z)
 
 
@@ -67,7 +67,7 @@ class Libro:
         
         df = pd.read_csv(file_libro,on_bad_lines='skip')
         print("         ----------------------------------Libros actuales----------------------------------")
-        print(df)
+        
         cual = input('Elija que libro eliminar por id:  ')
 
         
@@ -75,7 +75,7 @@ class Libro:
         df = df.drop(cual)
         df.to_csv(file_libro,)
         print("         ----------------------------Se ha elimado el libro. Libros actuales----------------------------")
-        print(df)
+        
 
 
 
@@ -113,7 +113,7 @@ class Libro:
             print(fortitulo.head())
         if search == 2:
             print('Tenemos los siguientes ISBN:  ', '\n', ISBN_book.to_string())
-            search_ISBN = input('Ingresa el ISBN de un libro:  ').upper()
+            search_ISBN = input('Ingresa el ISBN de un libro:  ')
             forISBN = datos[datos['ISBN'] == search_ISBN]
             print(forISBN.head())
 
@@ -171,7 +171,7 @@ class Libro:
         valGenre =  input("Ingrese el nuevo genero:  ").capitalize()
         df.loc[df['Id'] == valId, "Genero"] = valGenre
 
-        valISBN =  input("Ingrese el nuevo ISBN:  ").upper()
+        valISBN =  input("Ingrese el nuevo ISBN:  ")
         df.loc[df['Id'] == valId, "ISBN"] = valISBN
 
         valEditorial =  input("Ingrese la nueva editorial:  ").title()
