@@ -1,6 +1,4 @@
 ﻿Id,Titulo,Genero,ISBN,Editorial,Autor(es)
-1,Cien años de soledad,Novela,978-84-9759-220-8,Editorial Sudamericana,Gabriel Garcia Marquez
-2,El señor de los anillos,Literatura fantástica,978-84-450-1395-3,George Allen & Unwin HarperCollins,J. R. R. Tolkien
-3,Un mundo feliz,Ciencia ficción,978-84-9759-425-7,DEBOLSILLO,Aldous Huxley
-4,Orgullo y prejuicio,Novela,978-84-670-4564-2,Austral,Jane Austen
-5,Crimen y castigo,Novela,978-84-08-15576-8,Austral,Fiódor Dostoyevski
+F2T2,Cien años de soledad,Novela,978-84-9759-220-8,Editorial Sudamericana,Gabriel Garcia Marquez
+R4S7,Un mundo feliz,Ciencia ficción,978-84-9759-425-7,Debolsillo,Aldous Huxley
+M2C6,Orgullo y prejuicio,Novela,978-84-670-4564-2,Austral,Jane Austena
