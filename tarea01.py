@@ -107,13 +107,13 @@ class Libro:
         search = int(input("Elija una opcion de busqueda de informacion de  libros: \n1) Por Titulo \n2) Por ISBN\n  "))
 
         if search == 1: 
-            print('Tenemos los siguientes libros:', '\n', title)
+            print('Tenemos los siguientes titulos de libros:', '\n', title.to_string())
             search_book = input("Ingrese el titulo de un libro:  ").capitalize()             
             fortitulo = datos[datos['Titulo'] == search_book]
             print(fortitulo.head())
         if search == 2:
-            print('Tenemos los siguientes ISBN:  ', '\n', ISBN_book)
-            search_ISBN = input('Ingresa el ISBN de un libro:  ')
+            print('Tenemos los siguientes ISBN:  ', '\n', ISBN_book.to_string())
+            search_ISBN = input('Ingresa el ISBN de un libro:  ').upper()
             forISBN = datos[datos['ISBN'] == search_ISBN]
             print(forISBN.head())
 
@@ -129,19 +129,19 @@ class Libro:
 
         search7 = int(input("Elija una opcion de busqueda de informacion de  libros: \n1) Por autor \n2) Por editorial \n3) Por genero\n"))
         if search7 == 1:
-            print('Tenemos los siguientes autores:  ', '\n', author)
+            print('Tenemos los siguientes autores:  ', '\n', author.to_string())
             search7_book = input('Ingrese el autor de un libro:  ').title()
             forAuthor = datos[datos['Autor(es)'] == search7_book]
             print(forAuthor.head())
 
         if search7 == 2:
-            print('Tenemos los siguientes editoriales:  ', '\n', editorial)
-            search7_book = input('Ingrese la editorial:  ')
+            print('Tenemos los siguientes editoriales:  ', '\n', editorial.to_string())
+            search7_book = input('Ingrese la editorial:  ').title()
             forEditorial = datos[datos['Editorial'] == search7_book]
             print(forEditorial.head())
 
         if search7 == 3:
-            print('Tenemos los siguientes generos:  ', '\n', genre)
+            print('Tenemos los siguientes generos:  ', '\n', genre.to_string())
             search7_book = input('Ingrese el genero:  ').capitalize()
             forGenre = datos[datos['Genero'] == search7_book]
             print(forGenre.head())
@@ -153,19 +153,19 @@ class Libro:
 
         valId = input("Ingrese que libro actualizar por ID:  ")
 
-        valTitle =  input("Ingrese el nuevo titulo:  ")
+        valTitle =  input("Ingrese el nuevo titulo:  ").capitalize()
         df.loc[df['Id'] == valId, "Titulo"] = valTitle
 
-        valGenre =  input("Ingrese el nuevo genero:  ")
+        valGenre =  input("Ingrese el nuevo genero:  ").capitalize()
         df.loc[df['Id'] == valId, "Genero"] = valGenre
 
-        valISBN =  input("Ingrese el nuevo ISBN:  ")
+        valISBN =  input("Ingrese el nuevo ISBN:  ").upper()
         df.loc[df['Id'] == valId, "ISBN"] = valISBN
 
-        valEditorial =  input("Ingrese la nueva editorial:  ")
+        valEditorial =  input("Ingrese la nueva editorial:  ").title()
         df.loc[df['Id'] == valId, "Editorial"] = valEditorial
 
-        valAutor =  input("Ingrese el nuevo autor :  ")
+        valAutor =  input("Ingrese el nuevo autor :  ").title()
         df.loc[df['Id'] == valId, "Autor(es)"] = valAutor
 
         
