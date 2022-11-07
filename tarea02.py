@@ -109,7 +109,6 @@ def get_info_from_type(nom_type):
     
 # Obtiene todos los datos finales de las formas
 def get_info_from_form(num_form):
-    #response_form = api_get_request_form(num_form)
     response_form = api_get_request_pokemon(num_form)
     print("\nPokemon:",num_form)
     get_form_from_response(response_form)
@@ -124,12 +123,13 @@ while again == True:
                             Opción 3: Listar pokemons por habilidad.
                             Opción 4: Listar pokemons por habitat.
                             Opción 5: Listar pokemons por tipo.
+                            Opción 6: Salir.
 
     ''')
 
 
     option = int(input("Elija el numero de una opcion:  "))
-    while option not in (1, 2, 3, 4, 5):
+    while option not in (1, 2, 3, 4, 5, 6):
         option = int(input("Debe elegir un numero de la opcion (1,2,3,4,5): "))
 
 
@@ -231,3 +231,7 @@ while again == True:
 
         retornMenu = input("\n¿Deseas volver al menu? [y/n]: ").lower()
         again=menu(retornMenu,again)
+        
+    if option == 6:
+        again = False
+        print("El programa a finalizado.") 
